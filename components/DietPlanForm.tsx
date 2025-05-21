@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { sendOpenAi } from "@/libs/gpt";
+import apiClient from '@/libs/api';
 
 interface DietPlanFormData {
   mealsPerDay: string;
@@ -31,13 +31,19 @@ const DietPlanForm = () => {
     try {
       // 构造messages，假设formData转为prompt
       const messages = [
-        { role: "system", content: "你是专业的营养师，请根据用户信息生成一周的个性化饮食计划。包括每天的早中晚餐和对应的热量值（要求：1. 不要输出除了计划以外的多余的文字 2. 不需要输出营养成份）" },
-        { role: "user", content: `用户信息：${JSON.stringify(formData)}` }
+        { role: "system", content: "You are a professional nutritionist. Please generate a personalized one-week meal plan based on the user's information. Include breakfast, lunch, and dinner for each day, along with the corresponding calorie values.\\Requirements:1.Do not output any text other than the meal plan itself. 2.Do not include nutritional components." },
+        { role: "user", content: `User Info：${JSON.stringify(formData)}` }
       ];
       // userId用email的hash或简单用email长度
       const userId = formData.email ? formData.email : "anonymous";
-        const aiResult = await sendOpenAi(messages, userId);
-        console.log(aiResult);
+      const response = await apiClient.post('/gpt', {
+        messages,
+        userId,
+        max: 1000,
+        temp: 0.8
+      });
+      const aiResult = (response as any).result;
+      console.log(aiResult);
       if (aiResult) {
         setAiResult(aiResult);
         toast.success("AI饮食计划生成！");
@@ -157,7 +163,7 @@ const DietPlanForm = () => {
           >
             return
           </button>
-          <h3 className="font-bold mb-2 text-lg text-center">AI为您定制的饮食计划</h3>
+          <h3 className="font-bold mb-2 text-lg text-center">AI Meal Plan</h3>
           <div>{aiResult}</div>
         </div>
       )}

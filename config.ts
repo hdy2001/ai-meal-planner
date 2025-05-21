@@ -8,7 +8,7 @@ const config = {
   appDescription:
     "The world's first AI-driven diet management assistant, designed for fitness enthusiasts and those with special dietary needs.etc.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
-  domainName: "shipfa.st",
+  domainName: "ai-meal-plannner.com",
   crisp: {
     // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
     id: "",

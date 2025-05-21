@@ -30,7 +30,9 @@ export const sendOpenAi = async (
   };
 
   try {
+    console.log('test gpt lib url body options', url, body, options)
     const res = await axios.post(url, body, options);
+    console.log('test gpt lib res', res)
 
     const answer = res.data.choices[0].message.content;
     const usage = res?.data?.usage;
