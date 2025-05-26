@@ -3,10 +3,10 @@ import { ConfigProps } from "./types/config";
 
 const config = {
   // REQUIRED
-  appName: "AI-Powered Meal Planner",
+  appName: "ai meal planner",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "The world's first AI-driven diet management assistant, designed for fitness enthusiasts and those with special dietary needs.etc.",
+    "AI Meal Planner: The world's first AI-driven diet management assistant, designed for fitness enthusiasts and those with special dietary needs.etc.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "ai-meal-plannner.com",
   crisp: {
